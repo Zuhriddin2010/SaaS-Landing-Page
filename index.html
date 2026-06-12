@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚡ NexisCloud - Next-Gen SaaS Platform</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #060814;
+      --card-bg: #0e1326;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #64748b;
+      --neon-purple: #a855f7;
+      --neon-cyan: #06b6d4;
+      --neon-green: #10b981;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; scroll-behavior: smooth; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* 🌐 NAVIGATION BAR */
+    nav {
+      background: rgba(14, 19, 38, 0.8); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    .logo { font-size: 20px; font-weight: 800; background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+    
+    .nav-actions { display: flex; align-items: center; gap: 15px; }
+    .user-profile-badge { display: none; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: 20px; font-size: 13px; border: 1px solid var(--border-color); }
+
+    /* 🚀 HERO SECTION */
+    .hero { text-align: center; padding: 100px 20px 60px 20px; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+    .hero h2 { font-size: 48px; font-weight: 900; line-height: 1.2; max-width: 800px; }
+    .hero h2 span { background: linear-gradient(to right, #00f2fe, #4facfe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { color: var(--text-muted); font-size: 16px; max-width: 600px; }
+    
+    .btn {
+      background: linear-gradient(135deg, var(--neon-cyan), #0072ff); color: white;
+      padding: 12px 28px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; transition: 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn:hover { filter: brightness(1.1); box-shadow: 0 0 20px rgba(6, 182, 212, 0.4); }
+    .btn.btn-secondary { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); }
+    .btn.btn-secondary:hover { background: rgba(255,255,255,0.1); box-shadow: none; }
+
+    /* 💰 PRICING PLANS (OBUNA TIZIMI) */
+    .section-title { text-align: center; margin: 60px 0 30px 0; font-size: 28px; font-weight: 800; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
+    
+    .price-card {
+      background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px;
+      display: flex; flex-direction: column; gap: 20px; position: relative; transition: 0.3s;
+    }
+    .price-card.popular { border-color: var(--neon-purple); box-shadow: 0 0 30px rgba(168, 85, 247, 0.15); }
+    .badge { position: absolute; top: 15px; right: 15px; background: var(--neon-purple); color: #fff; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    
+    .price-card h3 { font-size: 20px; }
+    .price-card .cost { font-size: 36px; font-weight: 800; }
+    .price-card .cost span { font-size: 14px; color: var(--text-muted); font-weight: 400; }
+    
+    .features-list { list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: #cbd5e1; }
+    .features-list li { display: flex; align-items: center; gap: 10px; }
+    .features-list li i { color: var(--neon-cyan); }
+
+    /* 🎛️ DASHBOARD SIMULATOR (FOYDALANUVCHI BOSHQARUVI) */
+    .dashboard-panel {
+      background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 30px;
+      margin-bottom: 8px; display: none; flex-direction: column; gap: 20px;
+    }
+    .db-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+    .db-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .db-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; }
+    .db-card h4 { font-size: 13px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 5px; }
+    .db-card .num { font-size: 24px; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container nav-container">
+      <div class="logo" onclick="window.location.reload()"><i class="fa-solid fa-layer-group"></i> NEXISCLOUD</div>
+      <div class="nav-actions">
+        <div class="user-profile-badge" id="userBadge">
+          <i class="fa-solid fa-circle-user" style="color: var(--neon-cyan);"></i>
+          <span id="badgeName">mijoz@nexis.uz</span>
+        </div>
+        <button class="btn" id="loginBtn" onclick="simulateLogin()"><i class="fa-solid fa-right-to-bracket"></i> Tizimga kirish</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <section class="hero" id="heroSection">
+      <h2>Bulutli Biznesingizni <span>AI Algoritmlari</span> Bilan Tezlashtiring</h2>
+      <p>NexisCloud barcha jarayonlarni avtomatlashtirish, foydalanuvchilar boshqaruvi va yuqori xavfsizlikni bitta zamonaviy panelda taqdim etadi.</p>
+      <div>
+        <a href="#pricing" class="btn">Obunani Boshlash <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <section class="dashboard-panel" id="dashboardSection">
+      <div class="db-header">
+        <div>
+          <h3><i class="fa-solid fa-chart-line" style="color: var(--neon-cyan);"></i> Nexis Boshqaruv Paneli</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Hisob holati: <span id="dbStatus" style="color: var(--neon-green); font-weight: 600;">Faol emas (Demo)</span></p>
+        </div>
+        <button class="btn btn-secondary" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Chiqish</button>
+      </div>
+      <div class="db-grid">
+        <div class="db-card">
+          <h4>Joriy Tarif</h4>
+          <div class="num" id="dbPlan" style="color: var(--neon-cyan);">Tekin (Free Plan)</div>
+        </div>
+        <div class="db-card">
+          <h4>API So'rovlar Limiti</h4>
+          <div class="num" id="dbLimit">1,000 / oy</div>
+        </div>
+        <div class="db-card">
+          <h4>Bulutli Server Xotirasi</h4>
+          <div class="num" id="dbStorage">500 MB</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <h2 class="section-title">Moslashuvchan Obuna Tariflari</h2>
+      <div class="pricing-grid">
+        
+        <div class="price-card">
+          <h3>Boshlang'ich</h3>
+          <div class="cost">$0 <span>/ umrbod</span></div>
+          <p style="font-size: 13px; color: var(--text-muted);">Sinab ko'rish va kichik loyihalar uchun mo'ljallangan.</p>
+          <ul class="features-list">
+            <li><i class="fa-solid fa-circle-check"></i> 1,000 API so'rovlar</li>
+            <li><i class="fa-solid fa-circle-check"></i> 500 MB Bulutli xotira</li>
+            <li><i class="fa-solid fa-circle-check"></i> Haftalik zaxira nusxasi</li>
+          </ul>
+          <button class="btn btn-secondary" style="margin-top: auto;" onclick="purchasePlan('Starter', '1,000 / oy', '500 MB', '$0')">Faollashtirish</button>
+        </div>
+
+        <div class="price-card popular">
+          <div class="badge">Ommabop</div>
+          <h3>Biznes Pro</h3>
+          <div class="cost">$29 <span>/ oyiga</span></div>
+          <p style="font-size: 13px; color: var(--text-muted);">Kattalashayotgan jamoalar va professional dasturchilar uchun.</p>
+          <ul class="features-list">
+            <li><i class="fa-solid fa-circle-check"></i> 100,000 API so'rovlar</li>
+            <li><i class="fa-solid fa-circle-check"></i> 50 GB Tezkor SSD xotira</li>
+            <li><i class="fa-solid fa-circle-check"></i> 24/7 Premium qo'llab-quvvatlash</li>
+            <li><i class="fa-solid fa-circle-check"></i> AI tavsiyalar moduli</li>
+          </ul>
+          <button class="btn" style="margin-top: auto;" onclick="purchasePlan('Biznes Pro', '100,000 / oy', '50 GB', '$29')">Obuna bo'lish</button>
+        </div>
+
+        <div class="price-card">
+          <h3>Kompaniya</h3>
+          <div class="cost">$99 <span>/ oyiga</span></div>
+          <p style="font-size: 13px; color: var(--text-muted);">Katta tashkilotlar va yuqori yuklamali tizimlar uchun.</p>
+          <ul class="features-list">
+            <li><i class="fa-solid fa-circle-check"></i> Cheksiz API so'rovlar</li>
+            <li><i class="fa-solid fa-circle-check"></i> 1 TB Ajratilgan server xotirasi</li>
+            <li><i class="fa-solid fa-circle-check"></i> Shaxsiy menejer yordami</li>
+            <li><i class="fa-solid fa-circle-check"></i> Maxsus SLA kafolati</li>
+          </ul>
+          <button class="btn btn-secondary" style="margin-top: auto;" onclick="purchasePlan('Enterprise', 'Cheksiz', '1 TB', '$99')">Bog'lanish</button>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // Tizim holatini JSON ko'rinishida saqlash
+    let session = {
+      isLoggedIn: false,
+      userEmail: "",
+      currentPlan: "Tekin (Free Plan)",
+      limit: "1,000 / oy",
+      storage: "500 MB"
+    };
+
+    // 🔐 LOGIN SIMULYATSIYASI
+    function simulateLogin() {
+      const email = prompt("Tizimga kirish uchun Email manzilingizni kiriting:", "info@nexis.uz");
+      if (email && email.trim() !== "") {
+        session.isLoggedIn = true;
+        session.userEmail = email;
+        
+        // UI elementlarini yangilash
+        document.getElementById('loginBtn').style.display = 'none';
+        document.getElementById('userBadge').style.display = 'flex';
+        document.getElementById('badgeName').innerText = email;
+        
+        // Panelni ko'rsatish
+        document.getElementById('dashboardSection').style.display = 'flex';
+        document.getElementById('heroSection').style.padding = '40px 20px 20px 20px'; // Masofani qisqartirish
+        
+        updateDashboardUI();
+      }
+    }
+
+    // 💳 OBUNA XARID QILISH FUNKSIYASI
+    function purchasePlan(planName, limitVal, storageVal, price) {
+      if (!session.isLoggedIn) {
+        alert("Iltimos, obuna xarid qilishdan oldin 'Tizimga kirish' tugmasi orqali hisobingizni faollashtiring!");
+        simulateLogin();
+        return;
+      }
+
+      const confirmPurchase = confirm(`Siz rostdan ham ${planName} tarifiga obuna bo'lishni xohlaysizmi? (${price})`);
+      if (confirmPurchase) {
+        session.currentPlan = planName;
+        session.limit = limitVal;
+        session.storage = storageVal;
+        
+        updateDashboardUI();
+        
+        // Sahifani yuqoriga panel tomon silliq ko'chirish
+        document.getElementById('dashboardSection').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Dashboard ma'lumotlarini yangilash
+    function updateDashboardUI() {
+      document.getElementById('dbPlan').innerText = session.currentPlan;
+      document.getElementById('dbLimit').innerText = session.limit;
+      document.getElementById('dbStorage').innerText = session.storage;
+      document.getElementById('dbStatus').innerText = "Faol (Premium)";
+      document.getElementById('dbStatus').style.color = 'var(--neon-green)';
+    }
+
+    // 🚪 CHIQUV LOGIKASI
+    function logout() {
+      session.isLoggedIn = false;
+      session.userEmail = "";
+      session.currentPlan = "Tekin (Free Plan)";
+      session.limit = "1,000 / oy";
+      session.storage = "500 MB";
+
+      document.getElementById('loginBtn').style.display = 'inline-flex';
+      document.getElementById('userBadge').style.display = 'none';
+      document.getElementById('dashboardSection').style.display = 'none';
+      document.getElementById('heroSection').style.padding = '100px 20px 60px 20px';
+      
+      alert("Siz tizimdan muvaffaqiyatli chiqdingiz.");
+    }
+  </script>
+</body>
+</html>
